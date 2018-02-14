@@ -28,6 +28,7 @@ namespace MedicalAttention.Controllers
         }
 
         // GET api/appointments
+        [Route("api/appointments")]
         public AppointmentsResponse Get()
         {
             AppointmentsResponse response = new AppointmentsResponse() { Success = true };
@@ -47,12 +48,17 @@ namespace MedicalAttention.Controllers
         }
 
         // GET api/appointments/5
+        [Route("api/appointments/{id}")]
         public AppointmentResponse Get(int id)
         {
             AppointmentResponse response = new AppointmentResponse() { Success = true };
             try
             {
                 var appointment = appointmentService.GetAppointment(id);
+                if(appointment == null)
+                {
+                    throw new RecordNotFoundException(string.Format("Appointment {0} not found", id));
+                }
                 response.Appointment = appointment;
             }
             catch (RecordNotFoundException exc)
@@ -72,6 +78,7 @@ namespace MedicalAttention.Controllers
         }
 
         // POST api/appointments
+        [Route("api/appointments")]
         public Response Post(Appointment appointment)
         {
             Response response = new Response() { Success = true };
@@ -90,12 +97,13 @@ namespace MedicalAttention.Controllers
         }
 
         // PUT api/appointments/5
+        [Route("api/appointments/{id}")]
         public Response Put(int id, Appointment appointment)
         {
             Response response = new Response() { Success = true };
             try
             {
-                appointmentService.UpdateAppointment(appointment);
+                appointmentService.UpdateAppointment(id, appointment);
             }
             catch (RecordNotFoundException exc)
             {
@@ -113,8 +121,10 @@ namespace MedicalAttention.Controllers
             return response;
         }
 
-        // DELETE api/appointments/5
-        public Response Delete(int id)
+        // PUT api/appointments/cancel/5
+        [Route("api/appointments/cancel/{id}")]
+        [HttpPut]
+        public Response Cancel(int id)
         {
             Response response = new Response() { Success = true };
             try
@@ -138,7 +148,7 @@ namespace MedicalAttention.Controllers
         }
 
         // GET api/appointments/availableAppointments/5
-        [Route("availableAppointments/{id}")]
+        [Route("api/appointments/availableAppointments/{id}")]
         public AppointmentsResponse GetDoctorAvailableAppointments(int id)
         {
             AppointmentsResponse response = new AppointmentsResponse() { Success = true };
@@ -158,7 +168,7 @@ namespace MedicalAttention.Controllers
         }
 
         // GET api/appointments/asignedAppointments/5
-        [Route("asignedAppointments/{id}")]
+        [Route("api/appointments/asignedAppointments/{id}")]
         public AppointmentsResponse GetDoctorAsignedAppointments(int id)
         {
             AppointmentsResponse response = new AppointmentsResponse() { Success = true };

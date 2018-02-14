@@ -19,15 +19,23 @@
         /// Represents a service for the patient.
         /// </summary>
         IPatientService patientService;
-        
+
+        /// <summary>
+        /// Represents a service for the doctor.
+        /// </summary>
+        IDoctorService doctorService;
+
         /// <summary>
         /// Constructor of the class.
         /// </summary>
         /// <param name="repository">Repository for the appointment.</param>
-        public AppointmentService(IAppointmentRepository repository, IPatientService patientService)
+        /// <param name="patientService">Patient service.</param>
+        /// <param name="doctorService">Doctor service.</param>
+        public AppointmentService(IAppointmentRepository repository, IPatientService patientService, IDoctorService doctorService)
         {
             this.repository = repository;
             this.patientService = patientService;
+            this.doctorService = doctorService;
         }
 
         /// <summary>
@@ -66,8 +74,20 @@
                     doctorAppointment.Date.Minute == appointment.Date.Minute &&
                     doctorAppointment.State.Id == (int)StateEnum.Assigned)
                 {
-                    throw new NotValidDateException("El doctor ya tiene asignada esa fecha de atención");
+                    throw new NotValidDateException("The doctor has already assigned that attention date");
                 }
+            }
+
+            var patient = patientService.GetPatient(appointment.Patient.Id);
+            if(patient == null || patient.Id == 0)
+            {
+                throw new RecordNotFoundException("The patient does not exist");
+            }
+
+            var doctor = doctorService.GetDoctor(appointment.Doctor.Id);
+            if (doctor == null || doctor.Id == 0)
+            {
+                throw new RecordNotFoundException("The doctor does not exist");
             }
 
             repository.CreateAppointment(appointment);
@@ -76,8 +96,9 @@
         /// <summary>
         /// Update an appointment.
         /// </summary>
+        /// <param name="id">Id of the appointment</param>
         /// <param name="appointment">Appointment to update.</param>
-        public void UpdateAppointment(Appointment appointment)
+        public void UpdateAppointment(int id, Appointment appointment)
         {
             ValidateDate(appointment);
             var appointments = repository.GetDoctorAppointments(appointment.Doctor.Id);
@@ -91,11 +112,22 @@
                     doctorAppointment.Id != appointment.Id &&
                     doctorAppointment.State.Id == (int)StateEnum.Assigned)
                 {
-                    throw new NotValidDateException("El doctor ya tiene asignada esa fecha de atención");
+                    throw new NotValidDateException("The doctor has already assigned that attention date");
                 }
             }
+            var patient = patientService.GetPatient(appointment.Patient.Id);
+            if (patient == null && patient.Id == 0)
+            {
+                throw new RecordNotFoundException("The patient does not exist");
+            }
 
-            repository.UpdateAppointment(appointment);
+            var doctor = doctorService.GetDoctor(appointment.Doctor.Id);
+            if (doctor == null && doctor.Id == 0)
+            {
+                throw new RecordNotFoundException("The doctor does not exist");
+            }
+
+            repository.UpdateAppointment(id, appointment);
         }
 
         /// <summary>
@@ -184,15 +216,15 @@
         {
             if (appointment.Date < DateTime.Now)
             {
-                throw new NotValidDateException("La fecha de la cita debe ser mayor a la fecha del sistema");
+                throw new NotValidDateException("The date of the appointment must be greater than the date of the system");
             }
             if (appointment.Date.Hour < 8 || appointment.Date.Hour > 18)
             {
-                throw new NotValidDateException("La hora debe estar entre las 8:00 am y 6:00 pm");
+                throw new NotValidDateException("The time should be between 8:00 a.m. and 6:00 p.m.");
             }
             if (appointment.Date.Minute != 0 && appointment.Date.Minute != 20 && appointment.Date.Minute != 40)
             {
-                throw new NotValidDateException("Los minutos válidos para la hora son 0, 20 y 40");
+                throw new NotValidDateException("The minutes valid for the hour are 0, 20 and 40");
             }
         }
     }

@@ -37,8 +37,9 @@
         /// <summary>
         /// Update an appointment.
         /// </summary>
+        /// <param name="id">Id of the appointment</param>
         /// <param name="appointment">Appointment to update.</param>
-        void UpdateAppointment(Appointment appointment);
+        void UpdateAppointment(int id, Appointment appointment);
 
         /// <summary>
         /// Cancel an appointment.

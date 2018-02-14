@@ -134,10 +134,11 @@
         /// <summary>
         /// Update an appointment.
         /// </summary>
+        /// <param name="id">Id of the appointment</param>
         /// <param name="appointment">Appointment to update.</param>
-        public void UpdateAppointment(Appointment appointment)
+        public void UpdateAppointment(int id, Appointment appointment)
         {
-            var currentAppointment = medicalAttentionContext.Appointments.FirstOrDefault(a => a.Id == appointment.Id);
+            var currentAppointment = medicalAttentionContext.Appointments.FirstOrDefault(a => a.Id == id);
             if (currentAppointment != null)
             {
                 currentAppointment.Date = appointment.Date;

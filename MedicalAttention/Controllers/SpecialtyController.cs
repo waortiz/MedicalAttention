@@ -1,6 +1,7 @@
 ﻿using MedicalAttention.Entities;
 using MedicalAttention.Models;
 using MedicalAttention.Services;
+using MedicalAttention.Utilities.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +28,7 @@ namespace MedicalAttention.Controllers
         }
 
         // GET api/specialties
+        [Route("api/specialties")]
         public SpecialtiesResponse Get()
         {
             SpecialtiesResponse response = new SpecialtiesResponse() { Success = true };
@@ -46,12 +48,18 @@ namespace MedicalAttention.Controllers
         }
 
         // GET api/specialties/5
+        [Route("api/specialties/{id}")]
         public SpecialtyResponse Get(int id)
         {
             SpecialtyResponse response = new SpecialtyResponse() { Success = true };
             try
             {
                 Specialty specialty = specialtyService.GetSpecialty(id);
+                if (specialty == null)
+                {
+                    throw new RecordNotFoundException(string.Format("Specialty {0} not found", id));
+                }
+
                 response.Specialty = specialty;
             }
             catch (Exception exc)
