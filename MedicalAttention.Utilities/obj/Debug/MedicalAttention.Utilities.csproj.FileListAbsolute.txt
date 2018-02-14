@@ -1,6 +1,0 @@
-D:\Desarrollo\DotNet\MedicalAttention\MedicalAttention.Utilities\bin\Debug\MedicalAttention.Utilities.dll
-D:\Desarrollo\DotNet\MedicalAttention\MedicalAttention.Utilities\bin\Debug\MedicalAttention.Utilities.pdb
-D:\Desarrollo\DotNet\MedicalAttention\MedicalAttention.Utilities\obj\Debug\MedicalAttention.Utilities.csprojResolveAssemblyReference.cache
-D:\Desarrollo\DotNet\MedicalAttention\MedicalAttention.Utilities\obj\Debug\MedicalAttention.Utilities.csproj.CoreCompileInputs.cache
-D:\Desarrollo\DotNet\MedicalAttention\MedicalAttention.Utilities\obj\Debug\MedicalAttention.Utilities.dll
-D:\Desarrollo\DotNet\MedicalAttention\MedicalAttention.Utilities\obj\Debug\MedicalAttention.Utilities.pdb
