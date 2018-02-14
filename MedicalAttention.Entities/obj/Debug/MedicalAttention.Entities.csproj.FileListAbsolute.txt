@@ -1,0 +1,11 @@
+D:\Desarrollo\DotNet\MedicalAttention\MedicalAttention.Entities\bin\Debug\MedicalAttention.Entities.dll
+D:\Desarrollo\DotNet\MedicalAttention\MedicalAttention.Entities\bin\Debug\MedicalAttention.Entities.pdb
+D:\Desarrollo\DotNet\MedicalAttention\MedicalAttention.Entities\obj\Debug\MedicalAttention.Entities.csprojResolveAssemblyReference.cache
+D:\Desarrollo\DotNet\MedicalAttention\MedicalAttention.Entities\obj\Debug\MedicalAttention.Entities.csproj.CoreCompileInputs.cache
+D:\Desarrollo\DotNet\MedicalAttention\MedicalAttention.Entities\obj\Debug\MedicalAttention.Entities.dll
+D:\Desarrollo\DotNet\MedicalAttention\MedicalAttention.Entities\obj\Debug\MedicalAttention.Entities.pdb
+D:\Desarrollo\DotNet\MedicalAttention\MedicalAttention.Entities\bin\Debug\Newtonsoft.Json.dll
+D:\Desarrollo\DotNet\MedicalAttention\MedicalAttention.Entities\bin\Debug\Newtonsoft.Json.xml
+D:\Desarrollo\DotNet\MedicalAttention\MedicalAttention.Entities\bin\Debug\RestSharp.dll
+D:\Desarrollo\DotNet\MedicalAttention\MedicalAttention.Entities\bin\Debug\System.ValueTuple.dll
+D:\Desarrollo\DotNet\MedicalAttention\MedicalAttention.Entities\bin\Debug\System.ValueTuple.xml
